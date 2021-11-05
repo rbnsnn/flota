@@ -19,6 +19,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Paper } from '@mui/material';
 import { mainItemList } from './ItemList';
+import { minHeight } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -94,7 +95,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            FlotaApp
           </Typography>
         </Toolbar>
       </AppBar>
@@ -124,7 +125,9 @@ export default function PersistentDrawerLeft() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Paper>
+        <Paper sx={{
+          minHeight: '80vh',
+        }}>
             <Typography>Content</Typography>
         </Paper>
       </Main>
