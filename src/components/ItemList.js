@@ -4,7 +4,7 @@ import React from 'react';
 
 export const mainItemList = (
     <div>
-        <ListItem>
+        <ListItem button>
             <ListItemIcon>
                 <DirectionsCarIcon />
             </ListItemIcon>
