@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 import { Box } from '@mui/system';
 import { TextField } from '@mui/material';
+import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import { DatePicker } from '@mui/lab';
+import { LocalizationProvider } from '@mui/lab';
 
 const AddVechicle = () => {
 
   const [carBrand, setCarBrand] = useState('');
   const [carModel, setCarModel] = useState('');
-  const [carProductionYear, setProductionYear] = useState('');
+  const [carProductionYear, setCarProductionYear] = useState(new Date());
   const [carCourse, setCarCourse] = useState('');
 
   const handleBrandChange = e => {
@@ -21,7 +24,7 @@ const AddVechicle = () => {
   }
 
   const handleCarProductionYearChange = e => {
-
+    setCarProductionYear(e)
 
   }
 
@@ -56,7 +59,6 @@ const AddVechicle = () => {
       onChange={handleBrandChange}
       required
       placeholder="Marka"
-      id="outlined-basic"
       label="Marka pojazdu" 
       variant="outlined"
       InputLabelProps={{
@@ -69,24 +71,21 @@ const AddVechicle = () => {
       onChange={handleModelChange}
       required
       placeholder="Model"
-      id="outlined-basic"
       label="Model pojazdu" 
       variant="outlined"
       InputLabelProps={{
               shrink: true,
             }}/>
+   <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <DatePicker
+          id="carProductionYear"
+          views={['year']}
+          label="Rok produkcji"
+          value={carProductionYear}
+          onChange={handleCarProductionYearChange}
+          renderInput={(params) => <TextField {...params} helperText={null} />}/>
+    </LocalizationProvider>
 
-    <TextField 
-      id="carProductionYear"
-      required
-      placeholder="Rok"
-      id="outlined-basic"
-      label="Rok produkcji" 
-      variant="outlined"
-      type="date"
-      InputLabelProps={{
-              shrink: true,
-            }}/>
 
     <TextField 
       id="carCourse"
@@ -94,7 +93,6 @@ const AddVechicle = () => {
       onChange={handleCarCourseChange}
       required
       placeholder="Przebieg"
-      id="outlined-basic"
       label="Przebieg pojazdu" 
       variant="outlined"
       pattern="\d*"
