@@ -10,7 +10,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './ItemList.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -64,6 +64,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export const MainItemList = () => {
     const dispatch = useDispatch();
+    const isDark = useSelector(store => store.theme.isDark)
 
     return (
         <div>
@@ -82,7 +83,7 @@ export const MainItemList = () => {
                 <ListItemText primary="Dodaj Pojazd" />
             </ListItem>
             <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
-                <MaterialUISwitch onChange={() => dispatch(themeChange())} />
+                <MaterialUISwitch checked={isDark} onChange={() => dispatch(themeChange())} />
             </ListItem>
 
 

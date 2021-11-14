@@ -1,6 +1,6 @@
 import { THEME_CHANGE } from "../actions/appActions"
 
-export const themeReducer = (state = { isDark: false, mode: 'light' }, action) => {
+export const themeReducer = (state = { isDark: true, mode: 'dark' }, action) => {
     switch (action.type) {
         case THEME_CHANGE:
             const isDark = !state.isDark;
