@@ -21,20 +21,20 @@ const AddVechicle = () => {
   const [carModel, setCarModel] = useState('');
   const [carProductionYear, setCarProductionYear] = useState(currentDate);
   const [carCourse, setCarCourse] = useState('');
-  const [carFuelType, setCarFuelType] = useState('');
+  // const [carFuelType, setCarFuelType] = useState('');
 
   const handleBrandChange = e => {
-      
-      setCarBrand(e.target.value);
+
+    setCarBrand(e.target.value);
   }
 
   const handleModelChange = e => {
 
-      setCarModel(e.target.value);
+    setCarModel(e.target.value);
   }
 
   const handleCarProductionYearChange = e => {
-    
+
     setCarProductionYear(e);
   }
 
@@ -42,96 +42,96 @@ const AddVechicle = () => {
 
     if (carCourse === 0) {
       setCarCourse('')
-    } else{
+    } else {
       setCarCourse(Number(e.target.value))
     }
   }
 
-  const handleCarFuelTypeChange = e => {
-    
-    setCarFuelType(e.target.value);
-  }
+  // const handleCarFuelTypeChange = e => {
 
-  return ( 
-    <Box component = "form"
-    sx = {
-      {
-        '& .MuiTextField-root': {
-          m: 1,
-          width: '25ch',
-          marginTop: '2ch'
-        },
+  //   setCarFuelType(e.target.value);
+  // }
+
+  return (
+    <Box component="form"
+      sx={
+        {
+          '& .MuiTextField-root': {
+            m: 1,
+            width: '25ch',
+            marginTop: '2ch'
+          },
+        }
       }
-    }
-    noValidate autoComplete = "off" >
-    
-    <div>
-    <TextField 
-      id="carBrand"
-      value={carBrand}
-      onChange={handleBrandChange}
-      required
-      placeholder="Marka"
-      label="Marka pojazdu" 
-      variant="outlined"
-      InputLabelProps={{
-              shrink: true,
-            }}/>
+      noValidate autoComplete="off" >
 
-    <TextField 
-      id="carModel"
-      value={carModel}
-      onChange={handleModelChange}
-      required
-      placeholder="Model"
-      label="Model pojazdu" 
-      variant="outlined"
-      InputLabelProps={{
-              shrink: true,
-            }}/>
-   <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <DatePicker
-          id="carProductionYear"
-          views={['year']}
-          label="Rok produkcji"
-          value={carProductionYear}
-          onChange={handleCarProductionYearChange}
-          maxDate={currentDate}
-          minDate={minimumDate}
-          renderInput={(params) => <TextField {...params} helperText={null} />}/>
-    </LocalizationProvider>
+      <div>
+        <TextField
+          id="carBrand"
+          value={carBrand}
+          onChange={handleBrandChange}
+          required
+          placeholder="Marka"
+          label="Marka pojazdu"
+          variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }} />
+
+        <TextField
+          id="carModel"
+          value={carModel}
+          onChange={handleModelChange}
+          required
+          placeholder="Model"
+          label="Model pojazdu"
+          variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }} />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            id="carProductionYear"
+            views={['year']}
+            label="Rok produkcji"
+            value={carProductionYear}
+            onChange={handleCarProductionYearChange}
+            maxDate={currentDate}
+            minDate={minimumDate}
+            renderInput={(params) => <TextField {...params} helperText={null} />} />
+        </LocalizationProvider>
 
 
-    <TextField 
-      id="carCourse"
-      value={carCourse}
-      onChange={handleCarCourseChange}
-      required
-      placeholder="Przebieg"
-      label="Przebieg pojazdu" 
-      variant="outlined"
-      pattern="\d*"
-      InputLabelProps={{
-              shrink: true,
-            }}
-    
-      inputProps={{
+        <TextField
+          id="carCourse"
+          value={carCourse}
+          onChange={handleCarCourseChange}
+          required
+          placeholder="Przebieg"
+          label="Przebieg pojazdu"
+          variant="outlined"
+          pattern="\d*"
+          InputLabelProps={{
+            shrink: true,
+          }}
+
+          inputProps={{
             min: 0,
             maxLength: 6,
-        }}
+          }}
 
-            />
- <FormControl component="fieldset">
-  <FormLabel component="legend">Gender</FormLabel>
-  <RadioGroup aria-label="gender" name="row-radio-buttons-group">
-    <FormControlLabel value="female" control={<Radio />} label="Female" />
-    <FormControlLabel value="male" control={<Radio />} label="Male" />
-    <FormControlLabel value="other" control={<Radio />} label="Other" />
- 
-  </RadioGroup>
-</FormControl>
-   
-    </div>
+        />
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup aria-label="gender" name="row-radio-buttons-group">
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+
+          </RadioGroup>
+        </FormControl>
+
+      </div>
 
     </Box>
   );

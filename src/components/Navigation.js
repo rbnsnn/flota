@@ -14,7 +14,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import { Paper } from '@mui/material';
-import { mainItemList } from './ItemList';
+import { MainItemList } from './ItemList';
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -120,7 +120,7 @@ export default function PersistentDrawerLeft() {
           </DrawerHeader>
           <Divider />
           <List>
-            {mainItemList}
+            <MainItemList />
           </List>
 
         </Drawer>
