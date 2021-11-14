@@ -16,149 +16,149 @@ import { Paper } from '@mui/material';
 
 const AddVechicle = () => {
 
-  const currentDate = new Date();
-  const minimumDate = new Date(1990, 1);
+    const currentDate = new Date();
+    const minimumDate = new Date(1990, 1);
 
-  const [carBrand, setCarBrand] = useState('');
-  const [carModel, setCarModel] = useState('');
-  const [carProductionYear, setCarProductionYear] = useState(currentDate);
-  const [carCourse, setCarCourse] = useState('');
-  // const [carFuelType, setCarFuelType] = useState('');
+    const [carBrand, setCarBrand] = useState('');
+    const [carModel, setCarModel] = useState('');
+    const [carProductionYear, setCarProductionYear] = useState(currentDate);
+    const [carCourse, setCarCourse] = useState('');
+    // const [carFuelType, setCarFuelType] = useState('');
 
-  const handleBrandChange = e => {
+    const handleBrandChange = e => {
 
-    setCarBrand(e.target.value);
-  }
-
-  const handleModelChange = e => {
-
-    setCarModel(e.target.value);
-  }
-
-  const handleCarProductionYearChange = e => {
-
-    setCarProductionYear(e);
-  }
-
-  const handleCarCourseChange = e => {
-
-    if (carCourse === 0) {
-      setCarCourse('')
-    } else {
-      setCarCourse(Number(e.target.value))
+        setCarBrand(e.target.value);
     }
-  }
 
-  // const handleCarFuelTypeChange = e => {
+    const handleModelChange = e => {
 
-  //   setCarFuelType(e.target.value);
-  // }
+        setCarModel(e.target.value);
+    }
 
-  return (
-    <Box component="form"
-      sx={
-        {
-          '& .MuiTextField-root': {
-            m: 1,
-            width: '80%',
-            marginTop: '2ch',
+    const handleCarProductionYearChange = e => {
 
-          },
-          '& .MuiFormControl-root': {
-            m: 1,
-            width: '80%',
-            marginTop: '2ch',
+        setCarProductionYear(e);
+    }
 
-          },
+    const handleCarCourseChange = e => {
 
-          '& .MuiFormLabel-root': {
-            textAlign: 'left',
-          }
-
+        if (carCourse === 0) {
+            setCarCourse('')
+        } else {
+            setCarCourse(Number(e.target.value))
         }
+    }
 
-      }
-      noValidate autoComplete="off" >
-      <Paper elevation={3} >
+    // const handleCarFuelTypeChange = e => {
 
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              id="carBrand"
-              value={carBrand}
-              onChange={handleBrandChange}
-              required
-              placeholder="Marka"
-              label="Marka pojazdu"
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }} />
+    //   setCarFuelType(e.target.value);
+    // }
 
-            <TextField
-              id="carModel"
-              value={carModel}
-              onChange={handleModelChange}
-              required
-              placeholder="Model"
-              label="Model pojazdu"
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }} />
-          </Grid>
-          <Grid item xs={6}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                id="carProductionYear"
-                views={['year']}
-                label="Rok produkcji"
-                value={carProductionYear}
-                onChange={handleCarProductionYearChange}
-                maxDate={currentDate}
-                minDate={minimumDate}
-                renderInput={(params) => <TextField {...params} helperText={null} />} />
-            </LocalizationProvider>
+    return (
+        <Box component="form"
+            sx={
+                {
+                    '& .MuiTextField-root': {
+                        m: 1,
+                        width: '80%',
+                        marginTop: '2ch',
+
+                    },
+                    '& .MuiFormControl-root': {
+                        m: 1,
+                        width: '80%',
+                        marginTop: '2ch',
+
+                    },
+
+                    '& .MuiFormLabel-root': {
+                        textAlign: 'left',
+                    }
+
+                }
+
+            }
+            noValidate autoComplete="off" >
+            <Paper elevation={3} >
+
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            id="carBrand"
+                            value={carBrand}
+                            onChange={handleBrandChange}
+                            required
+                            placeholder="Marka"
+                            label="Marka pojazdu"
+                            variant="outlined"
+                            InputLabelProps={{
+                                shrink: true,
+                            }} />
+
+                        <TextField
+                            id="carModel"
+                            value={carModel}
+                            onChange={handleModelChange}
+                            required
+                            placeholder="Model"
+                            label="Model pojazdu"
+                            variant="outlined"
+                            InputLabelProps={{
+                                shrink: true,
+                            }} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                id="carProductionYear"
+                                views={['year']}
+                                label="Rok produkcji"
+                                value={carProductionYear}
+                                onChange={handleCarProductionYearChange}
+                                maxDate={currentDate}
+                                minDate={minimumDate}
+                                renderInput={(params) => <TextField {...params} helperText={null} />} />
+                        </LocalizationProvider>
 
 
-            <TextField
-              id="carCourse"
-              value={carCourse}
-              onChange={handleCarCourseChange}
-              required
-              placeholder="Przebieg"
-              label="Przebieg pojazdu"
-              variant="outlined"
-              pattern="\d*"
-              InputLabelProps={{
-                shrink: true,
-              }}
+                        <TextField
+                            id="carCourse"
+                            value={carCourse}
+                            onChange={handleCarCourseChange}
+                            required
+                            placeholder="Przebieg"
+                            label="Przebieg pojazdu"
+                            variant="outlined"
+                            pattern="\d*"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
 
-              inputProps={{
-                min: 0,
-                maxLength: 6,
-              }}
+                            inputProps={{
+                                min: 0,
+                                maxLength: 6,
+                            }}
 
-            />
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
-                <FormControlLabel
-                  value="disabled"
-                  disabled
-                  control={<Radio />}
-                  label="other"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Box>
-  );
+                        />
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Gender</FormLabel>
+                            <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
+                                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                                <FormControlLabel
+                                    value="disabled"
+                                    disabled
+                                    control={<Radio />}
+                                    label="other"
+                                />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+            </Paper>
+        </Box>
+    );
 }
 
 export default AddVechicle;
