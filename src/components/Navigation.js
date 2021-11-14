@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
+import { Grid } from '@mui/material';
 import { Paper } from '@mui/material';
 import { MainItemList } from './ItemList';
 
@@ -20,6 +21,7 @@ import { MainItemList } from './ItemList';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Vechicles from './Vechicles';
 import AddVechicle from './AddVechicle';
+import AddVechicleHeader from './AddVechicleHeader';
 
 const drawerWidth = 240;
 
@@ -126,18 +128,23 @@ export default function PersistentDrawerLeft() {
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
-          <Paper sx={{
-            minHeight: '80vh',
-          }}>
-            <Switch>
-              <Route path="/vechicles">
-                <Vechicles />
-              </Route>
-              <Route path="/addvechicle">
-                <AddVechicle />
-              </Route>
-            </Switch>
-          </Paper>
+
+          <Switch>
+            <Route path="/vechicles">
+              <Vechicles />
+            </Route>
+            <Route path="/addvechicle">
+              <Grid container spacing={6} direction='column'>
+                <Grid item sm={2}>
+                  <AddVechicleHeader />
+                </Grid>
+                <Grid item sm={10}>
+                  <AddVechicle />
+                </Grid>
+              </Grid>
+            </Route>
+          </Switch>
+
         </Main>
       </Box>
     </Router>

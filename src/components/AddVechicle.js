@@ -10,6 +10,8 @@ import { RadioGroup } from '@mui/material';
 import { FormControlLabel } from '@mui/material';
 import { Radio } from '@mui/material';
 import { FormControl } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Paper } from '@mui/material';
 
 
 const AddVechicle = () => {
@@ -58,81 +60,103 @@ const AddVechicle = () => {
         {
           '& .MuiTextField-root': {
             m: 1,
-            width: '25ch',
-            marginTop: '2ch'
+            width: '80%',
+            marginTop: '2ch',
+
           },
+          '& .MuiFormControl-root': {
+            m: 1,
+            width: '80%',
+            marginTop: '2ch',
+
+          },
+
+          '& .MuiFormLabel-root': {
+            textAlign: 'left',
+          }
+
         }
+
       }
       noValidate autoComplete="off" >
+      <Paper elevation={3} >
 
-      <div>
-        <TextField
-          id="carBrand"
-          value={carBrand}
-          onChange={handleBrandChange}
-          required
-          placeholder="Marka"
-          label="Marka pojazdu"
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }} />
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              id="carBrand"
+              value={carBrand}
+              onChange={handleBrandChange}
+              required
+              placeholder="Marka"
+              label="Marka pojazdu"
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }} />
 
-        <TextField
-          id="carModel"
-          value={carModel}
-          onChange={handleModelChange}
-          required
-          placeholder="Model"
-          label="Model pojazdu"
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }} />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            id="carProductionYear"
-            views={['year']}
-            label="Rok produkcji"
-            value={carProductionYear}
-            onChange={handleCarProductionYearChange}
-            maxDate={currentDate}
-            minDate={minimumDate}
-            renderInput={(params) => <TextField {...params} helperText={null} />} />
-        </LocalizationProvider>
+            <TextField
+              id="carModel"
+              value={carModel}
+              onChange={handleModelChange}
+              required
+              placeholder="Model"
+              label="Model pojazdu"
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }} />
+          </Grid>
+          <Grid item xs={6}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                id="carProductionYear"
+                views={['year']}
+                label="Rok produkcji"
+                value={carProductionYear}
+                onChange={handleCarProductionYearChange}
+                maxDate={currentDate}
+                minDate={minimumDate}
+                renderInput={(params) => <TextField {...params} helperText={null} />} />
+            </LocalizationProvider>
 
 
-        <TextField
-          id="carCourse"
-          value={carCourse}
-          onChange={handleCarCourseChange}
-          required
-          placeholder="Przebieg"
-          label="Przebieg pojazdu"
-          variant="outlined"
-          pattern="\d*"
-          InputLabelProps={{
-            shrink: true,
-          }}
+            <TextField
+              id="carCourse"
+              value={carCourse}
+              onChange={handleCarCourseChange}
+              required
+              placeholder="Przebieg"
+              label="Przebieg pojazdu"
+              variant="outlined"
+              pattern="\d*"
+              InputLabelProps={{
+                shrink: true,
+              }}
 
-          inputProps={{
-            min: 0,
-            maxLength: 6,
-          }}
+              inputProps={{
+                min: 0,
+                maxLength: 6,
+              }}
 
-        />
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup aria-label="gender" name="row-radio-buttons-group">
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-
-          </RadioGroup>
-        </FormControl>
-
-      </div>
-
+            />
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Gender</FormLabel>
+              <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
+                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                <FormControlLabel
+                  value="disabled"
+                  disabled
+                  control={<Radio />}
+                  label="other"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+        </Grid>
+      </Paper>
     </Box>
   );
 }
