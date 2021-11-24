@@ -1,13 +1,15 @@
-export const ADD = 'ADD';
+export const ADD_CAR = 'ADD_CAR';
 export const THEME_CHANGE = 'THEME_CHANGE';
 
-export const addRate = ({ author, comment, rate }) => ({
-    type: ADD,
+export const addCar = ({ brand, model, productionYear, course, fuelType, id }) => ({
+    type: ADD_CAR,
     payload: {
-        author,
-        comment,
-        id: Math.floor(Math.random() * 1234),
-        rate,
+        brand,
+        model,
+        productionYear,
+        course,
+        fuelType,
+        id: Math.floor(Math.random() * 999999)
     }
 });
 

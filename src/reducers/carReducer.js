@@ -1,10 +1,10 @@
 import {
-    ADD,
+    ADD_CAR,
 } from '../actions/appActions';
 
-export const appReducer = (state = [], action) => {
+export const carReducer = (state = [], action) => {
     switch (action.type) {
-        case ADD:
+        case ADD_CAR:
             return [...state, action.payload];
 
 

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import { appReducer } from './appReducer';
+import { carReducer } from './carReducer';
 import { themeReducer } from './themeReducer'
 
 export const rootReducer = combineReducers({
-    form: appReducer,
+    car: carReducer,
     theme: themeReducer,
 });

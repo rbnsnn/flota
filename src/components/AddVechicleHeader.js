@@ -1,6 +1,5 @@
 import React from 'react';
 
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import { Typography } from '@mui/material';
 import { Paper } from '@mui/material';
 
