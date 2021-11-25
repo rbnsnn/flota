@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import {
     Card,
     CardContent,
@@ -6,9 +7,16 @@ import {
     Button,
     CardMedia
 } from "@mui/material";
+import { deleteCar } from "../actions/appActions";
 import carImage from '../car.jpg'
 
 const VehicleCard = ({ car }) => {
+
+    const dispatch = useDispatch();
+
+    const handleDelete = id => {
+        dispatch(deleteCar(id))
+    }
 
     return (
         <Card sx={{
@@ -34,7 +42,7 @@ const VehicleCard = ({ car }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Usuń</Button>
+                <Button onClick={() => handleDelete(car.id)} size="small">Usuń</Button>
             </CardActions>
             <CardMedia
                 component="img"
