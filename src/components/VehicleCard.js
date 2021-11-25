@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import {
     Card,
     CardContent,
@@ -7,18 +6,20 @@ import {
     Button,
     CardMedia
 } from "@mui/material";
-import { deleteCar } from "../actions/appActions";
+import { useState } from 'react';
 import carImage from '../car.jpg'
+import VehicleDeleteConfirmation from './VechicleDeleteConfirmation';
 
 const VehicleCard = ({ car }) => {
 
-    const dispatch = useDispatch();
+    const [isConfitmationOpen, setConfirmationOpen] = useState(false);
 
-    const handleDelete = id => {
-        dispatch(deleteCar(id))
+    const handleDialog = () => {
+        setConfirmationOpen(false);
     }
 
     return (
+
         <Card sx={{
             maxWidth: '20%',
             marginTop: '50px'
@@ -42,7 +43,7 @@ const VehicleCard = ({ car }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button onClick={() => handleDelete(car.id)} size="small">Usuń</Button>
+                <Button onClick={() => setConfirmationOpen(true)} size="small">Usuń</Button>
             </CardActions>
             <CardMedia
                 component="img"
@@ -50,7 +51,10 @@ const VehicleCard = ({ car }) => {
                 image={carImage}
                 alt="fura"
             />
+            <VehicleDeleteConfirmation isOpen={isConfitmationOpen} handleDialog={handleDialog} id={car.id} />
         </Card >
+
+
     );
 }
 

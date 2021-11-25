@@ -22,6 +22,10 @@ export const deleteCar = id => ({
     }
 });
 
+export const editCar = () => ({
+
+})
+
 export const themeChange = () => ({
     type: THEME_CHANGE,
 })
