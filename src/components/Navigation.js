@@ -18,9 +18,9 @@ import { MainItemList } from './ItemList';
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Vechicles from './Vechicles';
-import AddVechicle from './AddVechicle';
-import AddVechicleHeader from './AddVechicleHeader';
+import Vehicles from './Vehicles';
+import AddVehicle from './AddVehicle';
+import AddVehicleHeader from './AddVehicleHeader';
 
 const drawerWidth = 240;
 
@@ -129,16 +129,16 @@ export default function PersistentDrawerLeft() {
                     <DrawerHeader />
 
                     <Switch>
-                        <Route path="/vechicles">
-                            <Vechicles />
+                        <Route path="/vehicles">
+                            <Vehicles />
                         </Route>
-                        <Route path="/addvechicle">
+                        <Route path="/addvehicle">
                             <Grid container spacing={6} direction='column'>
                                 <Grid item sm={2}>
-                                    <AddVechicleHeader />
+                                    <AddVehicleHeader />
                                 </Grid>
                                 <Grid item sm={10}>
-                                    <AddVechicle />
+                                    <AddVehicle />
                                 </Grid>
                             </Grid>
                         </Route>

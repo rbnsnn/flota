@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
-const AddVechicleDialog = ({ isOpen, handleDialog }) => {
+const AddVehicleDialog = ({ isOpen, handleDialog }) => {
 
     return (
         <div>
@@ -27,4 +27,4 @@ const AddVechicleDialog = ({ isOpen, handleDialog }) => {
     );
 }
 
-export default AddVechicleDialog
+export default AddVehicleDialog

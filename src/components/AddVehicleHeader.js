@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import { Paper } from '@mui/material';
 
 
-const AddVechicleHeader = () => {
+const AddVehicleHeader = () => {
     return (
         <>
             <Paper elevation={0} sx={{
@@ -19,4 +19,4 @@ const AddVechicleHeader = () => {
     );
 }
 
-export default AddVechicleHeader;
+export default AddVehicleHeader;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import AddVechicleDialog from './AddVechicleDialog';
+import AddVehicleDialog from './AddVehicleDialog';
 
 import { useDispatch } from 'react-redux';
 
@@ -23,7 +23,7 @@ import { Button } from '@mui/material';
 
 
 
-const AddVechicle = ({ id }) => {
+const AddVehicle = ({ id }) => {
     const dispatch = useDispatch();
     const currentDate = new Date();
     const minimumDate = new Date(1990, 1);
@@ -136,26 +136,22 @@ const AddVechicle = ({ id }) => {
                             id="carBrand"
                             value={carBrand}
                             onChange={handleBrandChange}
-                            required
                             placeholder="Marka"
                             label="Marka pojazdu"
                             variant="outlined"
-                            InputLabelProps={{
-                                shrink: true,
-                            }} />
+
+                        />
 
                         <TextField
                             id="carModel"
                             value={carModel}
                             onChange={handleModelChange}
-                            required
                             error={isValid}
                             placeholder="Model"
                             label="Model pojazdu"
                             variant="outlined"
-                            InputLabelProps={{
-                                shrink: true,
-                            }} />
+                        />
+
                     </Grid>
                     <Grid item xs={6}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -175,16 +171,11 @@ const AddVechicle = ({ id }) => {
                             id="carCourse"
                             value={carCourse}
                             onChange={handleCarCourseChange}
-                            required
                             type="number"
                             placeholder="Przebieg"
                             label="Przebieg pojazdu"
                             variant="outlined"
                             pattern="\d*"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-
                             inputProps={{
                                 min: 0,
                                 maxLength: 6,
@@ -202,10 +193,10 @@ const AddVechicle = ({ id }) => {
                     </Grid>
                 </Grid>
                 <Button onClick={handleSubmit} variant="contained">Dodaj pojazd</Button>
-                <AddVechicleDialog isOpen={isDialogOpen} handleDialog={handleDialog} />
+                <AddVehicleDialog isOpen={isDialogOpen} handleDialog={handleDialog} />
             </Paper>
         </Box>
     );
 }
 
-export default AddVechicle;
+export default AddVehicle;

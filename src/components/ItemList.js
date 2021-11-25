@@ -69,14 +69,14 @@ export const MainItemList = () => {
     return (
         <div>
 
-            <ListItem button component={Link} to="/vechicles">
+            <ListItem button component={Link} to="/vehicles">
                 <ListItemIcon>
                     <DirectionsCarIcon />
                 </ListItemIcon>
                 <ListItemText primary="Pojazdy" />
             </ListItem>
 
-            <ListItem button divider component={Link} to="/addvechicle">
+            <ListItem button divider component={Link} to="/addvehicle">
                 <ListItemIcon>
                     <AddCircleOutlineIcon />
                 </ListItemIcon>
