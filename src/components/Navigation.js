@@ -1,151 +1,186 @@
 import React, { useState } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
+import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import MuiDrawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-import { Grid } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainItemList } from './ItemList';
 
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import Vehicles from './Vehicles';
 import AddVehicle from './AddVehicle';
 import AddVehicleHeader from './AddVehicleHeader';
 
-const drawerWidth = 240;
+function Copyright(props) {
+    return (
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            {'Copyright © '}
+            <Link color="inherit" href="https://mojastrona.pl/">
+                Miłosz Mokrzycki
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-    }),
-);
+const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
+        marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
+        transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
     }),
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-}));
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+        '& .MuiDrawer-paper': {
+            position: 'relative',
+            whiteSpace: 'nowrap',
+            width: drawerWidth,
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+            boxSizing: 'border-box',
+            ...(!open && {
+                overflowX: 'hidden',
+                transition: theme.transitions.create('width', {
+                    easing: theme.transitions.easing.sharp,
+                    duration: theme.transitions.duration.leavingScreen,
+                }),
+                width: theme.spacing(7),
+                [theme.breakpoints.up('sm')]: {
+                    width: theme.spacing(9),
+                },
+            }),
+        },
+    }),
+);
 
-export default function PersistentDrawerLeft() {
-    const theme = useTheme();
-    const [open, setOpen] = useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
+function DashboardContent() {
+    const [open, setOpen] = useState(true);
+    const toggleDrawer = () => {
+        setOpen(!open);
     };
 
     return (
         <Router>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-                <AppBar position="fixed" open={open}>
-                    <Toolbar>
+                <AppBar position="absolute" open={open}>
+                    <Toolbar
+                        sx={{
+                            pr: '24px',
+                        }}
+                    >
                         <IconButton
+                            edge="start"
                             color="inherit"
                             aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            edge="start"
-                            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                            onClick={toggleDrawer}
+                            sx={{
+                                marginRight: '36px',
+                                ...(open && { display: 'none' }),
+                            }}
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" noWrap component="div">
+                        <Typography
+                            component="h1"
+                            variant="h6"
+                            color="inherit"
+                            noWrap
+                            sx={{ flexGrow: 1 }}
+                        >
                             FlotaApp
                         </Typography>
+                        <IconButton color="inherit">
+                            <Badge badgeContent={0} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
                     </Toolbar>
                 </AppBar>
-                <Drawer
-                    sx={{
-                        width: drawerWidth,
-                        flexShrink: 0,
-                        '& .MuiDrawer-paper': {
-                            width: drawerWidth,
-                            boxSizing: 'border-box',
-                        },
-                    }}
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                >
-                    <DrawerHeader>
-                        <IconButton onClick={handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                <Drawer variant="permanent" open={open}>
+                    <Toolbar
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            px: [1],
+                        }}
+                    >
+                        <IconButton onClick={toggleDrawer}>
+                            <ChevronLeftIcon />
                         </IconButton>
-                    </DrawerHeader>
+                    </Toolbar>
                     <Divider />
                     <List>
                         <MainItemList />
                     </List>
 
                 </Drawer>
-                <Main open={open}>
-                    <DrawerHeader />
+                <Box
+                    component="main"
+                    sx={{
 
-                    <Switch>
-                        <Route path="/vehicles">
-                            <Vehicles />
-                        </Route>
-                        <Route path="/addvehicle">
-                            <Grid container spacing={6} direction='column'>
-                                <Grid item sm={2}>
-                                    <AddVehicleHeader />
+                        flexGrow: 1,
+                        height: '100vh',
+                        overflow: 'auto',
+                    }}
+                >
+                    <Toolbar />
+                    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+                        <Switch>
+                            <Route path="/vehicles">
+                                <Vehicles />
+                            </Route>
+                            <Route path="/addvehicle">
+                                <Grid container spacing={6} direction='column'>
+                                    <Grid item sm={2}>
+                                        <AddVehicleHeader />
+                                    </Grid>
+                                    <Grid item sm={10}>
+                                        <AddVehicle />
+                                    </Grid>
                                 </Grid>
-                                <Grid item sm={10}>
-                                    <AddVehicle />
-                                </Grid>
-                            </Grid>
-                        </Route>
-                    </Switch>
+                            </Route>
+                        </Switch>
 
-                </Main>
+                        <Copyright sx={{ pt: 4 }} />
+                    </Container>
+                </Box>
             </Box>
         </Router>
     );
+}
+
+export default function Dashboard() {
+    return <DashboardContent />;
 }
