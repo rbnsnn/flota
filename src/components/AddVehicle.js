@@ -185,9 +185,9 @@ const AddVehicle = ({ id }) => {
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Rodzaj paliwa</FormLabel>
                             <RadioGroup onChange={handleCarFuelTypeChange} value={carFuelType} row aria-label="fuelType" name="fuelType">
-                                <FormControlLabel value="diesel" control={<Radio />} label="Diesel" />
-                                <FormControlLabel value="gas" control={<Radio />} label="Benzyna" />
-                                <FormControlLabel value="other" control={<Radio />} label="Inne" />
+                                <FormControlLabel value="Diesel" control={<Radio />} label="Diesel" />
+                                <FormControlLabel value="Benzyna" control={<Radio />} label="Benzyna" />
+                                <FormControlLabel value="Inne" control={<Radio />} label="Inne" />
                             </RadioGroup>
                         </FormControl>
                     </Grid>
