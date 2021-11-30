@@ -21,12 +21,19 @@ const VehicleCard = ({ car }) => {
     return (
 
         <Card sx={{
-            maxWidth: '20%',
+            minWidth: '200px',
+            maxWidth: '200px',
             marginTop: '50px'
         }}>
+            <CardMedia
+                component="img"
+                height="200"
+                image={carImage}
+                alt="fura"
+            />
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Stimo
+                    Company
                 </Typography>
                 <Typography variant="h4" component="div">
                     {car.brand}
@@ -39,18 +46,15 @@ const VehicleCard = ({ car }) => {
                     Przebieg: {car.course}
                 </Typography>
                 <Typography variant="body2">
-                    zapierdala az milutko
+                    Description
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button onClick={() => setConfirmationOpen(true)} size="small">Usuń</Button>
+            <CardActions sx={{
+                justifyContent: 'space-around'
+            }}>
+                <Button size="large">Edytuj</Button>
+                <Button onClick={() => setConfirmationOpen(true)} size="large">Usuń</Button>
             </CardActions>
-            <CardMedia
-                component="img"
-                height="200"
-                image={carImage}
-                alt="fura"
-            />
             <VehicleDeleteConfirmation isOpen={isConfitmationOpen} handleDialog={handleDialog} id={car.id} />
         </Card >
 
