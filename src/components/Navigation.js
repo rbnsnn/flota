@@ -17,12 +17,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainItemList } from './ItemList';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Vehicles from './Vehicles';
 import AddVehicle from './AddVehicle';
 import AddVehicleHeader from './AddVehicleHeader';
+import HomePage from './HomePage';
 
 function Copyright(props) {
     return (
@@ -118,7 +120,9 @@ function DashboardContent() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            FlotaApp
+                            <RouterLink to="/">
+                                <Typography variant="h4" bold>FlotaApp</Typography>
+                            </RouterLink>
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={0} color="secondary">
@@ -170,6 +174,9 @@ function DashboardContent() {
                                         <AddVehicle />
                                     </Grid>
                                 </Grid>
+                            </Route>
+                            <Route exact path="/">
+                                <HomePage />
                             </Route>
                         </Switch>
 
