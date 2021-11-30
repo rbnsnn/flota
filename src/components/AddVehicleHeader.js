@@ -9,9 +9,8 @@ const AddVehicleHeader = () => {
         <>
             <Paper elevation={0} sx={{
                 minHeight: '10vh',
-                textAlign: 'left'
             }}>
-                <Typography variant="h2" gutterBottom component="div">
+                <Typography variant="h2" gutterBottom>
                     Dodaj nowy pojazd
                 </Typography>
             </Paper>
