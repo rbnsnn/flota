@@ -121,7 +121,11 @@ function DashboardContent() {
                             sx={{ flexGrow: 1 }}
                         >
                             <RouterLink to="/">
+<<<<<<< HEAD
                                 <Typography variant="h4" bold>FlotaApp</Typography>
+=======
+                                <Typography variant="h4">FlotaApp</Typography>
+>>>>>>> eadfd7a (add VehicleEdit component)
                             </RouterLink>
                         </Typography>
                         <IconButton color="inherit">

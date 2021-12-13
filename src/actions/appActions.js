@@ -22,8 +22,16 @@ export const deleteCar = id => ({
     }
 });
 
-export const editCar = () => ({
-
+export const editCar = ({ brand, model, productionYear, course, fuelType, id }) => ({
+    type: EDIT_CAR,
+    payload: {
+        brand,
+        model,
+        productionYear,
+        course,
+        fuelType,
+        id
+    }
 })
 
 export const themeChange = () => ({

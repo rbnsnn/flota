@@ -8,14 +8,20 @@ import {
 } from "@mui/material";
 import { useState } from 'react';
 import carImage from '../car.jpg'
-import VehicleDeleteConfirmation from './VechicleDeleteConfirmation';
+import VehicleDelete from './VechicleDelete';
+import VehicleEdit from './VehicleEdit';
 
 const VehicleCard = ({ car }) => {
 
-    const [isConfitmationOpen, setConfirmationOpen] = useState(false);
+    const [isDeleteOpen, setDeleteOpen] = useState(false);
+    const [isEditOpen, setEditOpen] = useState(false);
 
-    const handleDialog = () => {
-        setConfirmationOpen(false);
+    const handleDeleteDialog = () => {
+        setDeleteOpen(false);
+    }
+
+    const handleEditDialog = () => {
+        setEditOpen(false);
     }
 
     return (
@@ -52,10 +58,11 @@ const VehicleCard = ({ car }) => {
             <CardActions sx={{
                 justifyContent: 'space-around'
             }}>
-                <Button size="large">Edytuj</Button>
-                <Button onClick={() => setConfirmationOpen(true)} size="large">Usuń</Button>
+                <Button onClick={() => setEditOpen(true)} size="large">Edytuj</Button>
+                <Button onClick={() => setDeleteOpen(true)} size="large">Usuń</Button>
             </CardActions>
-            <VehicleDeleteConfirmation isOpen={isConfitmationOpen} handleDialog={handleDialog} id={car.id} />
+            <VehicleEdit isOpen={isEditOpen} handleDialog={handleEditDialog} id={car.id} />
+            <VehicleDelete isOpen={isDeleteOpen} handleDialog={handleDeleteDialog} id={car.id} />
         </Card >
 
 

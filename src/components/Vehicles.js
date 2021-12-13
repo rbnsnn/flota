@@ -7,15 +7,11 @@ import { Typography } from '@mui/material';
 
 
 const Vehicles = () => {
-
     const vehicles = useSelector(store => store.car)
-    console.log(vehicles)
 
-    const vehiclesList = vehicles.map(vehicle =>
-    (
+    const vehiclesList = vehicles.map(vehicle => (
         <VehicleCard key={vehicle.id} car={vehicle} />
-    )
-    )
+    ))
 
     const vehiclesListEmpty = (
         <Typography variant="h2">Brak pojazdów w bazie danych</Typography>
