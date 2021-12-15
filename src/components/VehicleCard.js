@@ -3,29 +3,13 @@ import {
     CardContent,
     CardActions,
     Typography,
-    Button,
     CardMedia
 } from "@mui/material";
-import { useState } from 'react';
 import carImage from '../car.jpg'
 import VehicleDelete from './VechicleDelete';
-import VehicleEdit from './VehicleEdit';
 
 const VehicleCard = ({ car }) => {
-
-    const [isDeleteOpen, setDeleteOpen] = useState(false);
-    const [isEditOpen, setEditOpen] = useState(false);
-
-    const handleDeleteDialog = () => {
-        setDeleteOpen(false);
-    }
-
-    const handleEditDialog = () => {
-        setEditOpen(false);
-    }
-
     return (
-
         <Card sx={{
             minWidth: '200px',
             maxWidth: '200px',
@@ -58,15 +42,10 @@ const VehicleCard = ({ car }) => {
             <CardActions sx={{
                 justifyContent: 'space-around'
             }}>
-                <Button onClick={() => setEditOpen(true)} size="large">Edytuj</Button>
-                <Button onClick={() => setDeleteOpen(true)} size="large">Usuń</Button>
+                {/* <VehicleEdit id={car.id} /> */}
+                <VehicleDelete id={car.id} />
             </CardActions>
-            <VehicleEdit isOpen={isEditOpen} handleDialog={handleEditDialog} id={car.id} />
-            <VehicleDelete isOpen={isDeleteOpen} handleDialog={handleDeleteDialog} id={car.id} />
         </Card >
-
-
     );
 }
-
 export default VehicleCard;

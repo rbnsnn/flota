@@ -1,48 +1,54 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { useDispatch } from 'react-redux';
 import { deleteCar } from '../actions/appActions';
 
+const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
-
-const VehicleDelete = ({ isOpen, handleDialog, id }) => {
-
-    const Transition = React.forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-    });
+const VehicleDelete = ({ id }) => {
+    const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
 
     const handleDelete = id => {
         dispatch(deleteCar(id))
-        handleDialog()
+        handleClose()
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+    const handleOpen = () => {
+        setOpen(true)
     }
 
     return (
         <div>
+            <Button variant="outlined" onClick={handleOpen}>
+                Usuń
+            </Button>
             <Dialog
-                open={isOpen}
-                onClose={handleDialog}
                 TransitionComponent={Transition}
                 keepMounted
-                aria-describedby="AddVehicle-dialog-description"
+                open={open}
+                onClose={handleClose}
             >
-                <DialogContent id="AddVehicle-dialog-description">
+                <DialogTitle>
                     Czy na pewno chcesz usunąć pojazd?
+                </DialogTitle>
+                <DialogContent>
+                    Po zatwierdzeniu wszystkie dane dotyczące tego pojazdu zostaną bez powrotnie usunięte
                 </DialogContent>
-
                 <DialogActions>
-
-                    <Button onClick={() => handleDelete(id)} autoFocus sx={{ color: 'red' }
-                    }>
-                        Usuń
-                    </Button>
-                    <Button onClick={handleDialog} autoFocus>
-                        Anuluj
-                    </Button>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={() => handleDelete(id)} sx={{ color: 'red' }}>Usuń</Button>
                 </DialogActions>
             </Dialog>
         </div>
