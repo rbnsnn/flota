@@ -30,7 +30,7 @@ export const editCar = ({ brand, model, productionYear, course, fuelType, id }) 
         productionYear,
         course,
         fuelType,
-        id
+        id,
     }
 })
 

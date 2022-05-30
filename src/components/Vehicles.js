@@ -8,6 +8,7 @@ import { Typography } from '@mui/material';
 
 const Vehicles = () => {
     const vehicles = useSelector(store => store.car)
+
     const vehiclesList = vehicles.map(vehicle => (
         <VehicleCard key={vehicle.id} car={vehicle} />
     ))

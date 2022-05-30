@@ -65,9 +65,7 @@ const AddVehicle = ({ id }) => {
     }
 
     const handleCarFuelTypeChange = e => {
-
         setCarFuelType(e.target.value);
-        console.log(carFuelType);
     }
 
     const handleSubmit = () => {

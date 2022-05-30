@@ -4,9 +4,10 @@ import {
     CardActions,
     Typography,
     CardMedia
-} from "@mui/material";
+} from "@mui/material"
 import carImage from '../car.jpg'
-import VehicleDelete from './VechicleDelete';
+import VehicleDelete from './VechicleDelete'
+import VehicleEdit from './VehicleEdit'
 
 const VehicleCard = ({ car }) => {
     return (
@@ -42,7 +43,7 @@ const VehicleCard = ({ car }) => {
             <CardActions sx={{
                 justifyContent: 'space-around'
             }}>
-                {/* <VehicleEdit id={car.id} /> */}
+                <VehicleEdit car={car} />
                 <VehicleDelete id={car.id} />
             </CardActions>
         </Card >

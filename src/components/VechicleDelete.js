@@ -30,7 +30,7 @@ const VehicleDelete = ({ id }) => {
     }
 
     return (
-        <div>
+        <>
             <Button variant="outlined" onClick={handleOpen}>
                 Usuń
             </Button>
@@ -51,7 +51,7 @@ const VehicleDelete = ({ id }) => {
                     <Button onClick={() => handleDelete(id)} sx={{ color: 'red' }}>Usuń</Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </>
     );
 }
 

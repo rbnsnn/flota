@@ -11,7 +11,22 @@ export const carReducer = (state = [], action) => {
             return state.filter(currentStateElement => currentStateElement.id !== action.payload.id);
 
         case EDIT_CAR:
-            return state;
+            return state.map(currentStateElement => {
+                if (currentStateElement.id !== action.payload.id) {
+                    return currentStateElement;
+                }
+
+                const { brand, model, productionYear, course, fuelType } = action.payload;
+
+                return ({
+                    brand,
+                    model,
+                    productionYear,
+                    course,
+                    fuelType,
+                    id: currentStateElement.id,
+                });
+            });
         default:
 
             return state;
