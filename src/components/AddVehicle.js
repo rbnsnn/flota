@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-
 import AddVehicleDialog from './AddVehicleDialog';
-
+import ValidationDialog from './ValidationDialog';
 import { useDispatch } from 'react-redux';
-
 import { addCar } from '../actions/appActions';
-
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import { Box } from '@mui/system';
 import { TextField } from '@mui/material';
@@ -20,11 +17,9 @@ import { Grid } from '@mui/material';
 import { Paper } from '@mui/material';
 import { Button } from '@mui/material';
 
-
-
-
 const AddVehicle = ({ id }) => {
     const dispatch = useDispatch();
+
     const currentDate = new Date();
     const minimumDate = new Date(1990, 1);
 
@@ -34,26 +29,49 @@ const AddVehicle = ({ id }) => {
     const [carCourse, setCarCourse] = useState('');
     const [carFuelType, setCarFuelType] = useState('');
     const [isDialogOpen, setDialogOpen] = useState(false);
-    const [isValid, setValid] = useState(false);
+    const [isValidationDialogOpen, setValidationDialogOpen] = useState(false);
+
+    const [isBrandValid, setBrandValid] = useState(false)
+    const [isModelValid, setModelValid] = useState(false);
+    const [isCourseValid, setCourseValid] = useState(false)
+
+    const handleBrandValid = e => {
+        if (e.target.value === '') {
+            setBrandValid(true)
+        } else {
+            setBrandValid(false)
+        }
+    }
+
+    const handleModelValid = e => {
+        if (e.target.value === '') {
+            setModelValid(true)
+        } else {
+            setModelValid(false)
+        }
+    }
+
+    const handleCourseValid = e => {
+        if (e.target.value === '') {
+            setCourseValid(true)
+        } else {
+            setCourseValid(false)
+        }
+    }
 
     const handleBrandChange = e => {
-
         setCarBrand(e.target.value);
     }
 
     const handleModelChange = e => {
-
-        if (e.target.value.length === 0) setValid(true);
         setCarModel(e.target.value);
     }
 
     const handleCarProductionYearChange = e => {
-
         setCarProductionYear(e);
     }
 
     const handleCarCourseChange = e => {
-
         if (e.target.value.length > 6) {
             return
         }
@@ -63,19 +81,29 @@ const AddVehicle = ({ id }) => {
             setCarCourse(Number(e.target.value))
         }
     }
-
     const handleCarFuelTypeChange = e => {
         setCarFuelType(e.target.value);
     }
 
     const handleSubmit = () => {
 
-        const productionYear = carProductionYear.getFullYear().toString()
-
+        if (carBrand.length === 0 || carModel.length === 0 || carCourse.length === 0) {
+            if (carBrand.length === 0) {
+                setBrandValid(true)
+            }
+            if (carModel.length === 0) {
+                setModelValid(true)
+            }
+            if (carCourse.length === 0) {
+                setCourseValid(true)
+            }
+            setValidationDialogOpen(true)
+            return
+        }
         const car = {
             brand: carBrand,
             model: carModel,
-            productionYear,
+            productionYear: carProductionYear,
             course: carCourse,
             fuelType: carFuelType,
             id,
@@ -85,7 +113,7 @@ const AddVehicle = ({ id }) => {
         setCarModel('');
         setCarProductionYear(currentDate);
         setCarCourse('');
-        setCarFuelType('');
+        setCarFuelType('Inne');
         setDialogOpen(true);
 
         dispatch(addCar(car));
@@ -93,6 +121,10 @@ const AddVehicle = ({ id }) => {
 
     const handleDialog = () => {
         setDialogOpen(false);
+    }
+
+    const handleValidationDialog = () => {
+        setValidationDialogOpen(false);
     }
 
     return (
@@ -103,7 +135,6 @@ const AddVehicle = ({ id }) => {
                         m: 1,
                         width: '80%',
                         marginTop: '2ch',
-
                     },
                     '& .MuiFormControl-root': {
                         m: 1,
@@ -111,7 +142,6 @@ const AddVehicle = ({ id }) => {
                         marginTop: '2ch',
 
                     },
-
                     '& .MuiFormLabel-root': {
                         textAlign: 'left',
                     },
@@ -119,37 +149,35 @@ const AddVehicle = ({ id }) => {
                         m: 1,
                         width: '30%',
                         marginBottom: '2ch',
-
                     }
-
                 }
-
             }
             noValidate autoComplete="off" >
             <Paper elevation={3} >
-
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <TextField
+                            required
                             id="carBrand"
                             value={carBrand}
                             onChange={handleBrandChange}
+                            onBlur={handleBrandValid}
+                            error={isBrandValid}
                             placeholder="Marka"
                             label="Marka pojazdu"
                             variant="outlined"
-
                         />
-
                         <TextField
+                            required
                             id="carModel"
                             value={carModel}
                             onChange={handleModelChange}
-                            error={isValid}
+                            onBlur={handleModelValid}
+                            error={isModelValid}
                             placeholder="Model"
                             label="Model pojazdu"
                             variant="outlined"
                         />
-
                     </Grid>
                     <Grid item xs={6}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -163,12 +191,13 @@ const AddVehicle = ({ id }) => {
                                 minDate={minimumDate}
                                 renderInput={(params) => <TextField {...params} helperText={null} />} />
                         </LocalizationProvider>
-
-
                         <TextField
+                            required
                             id="carCourse"
                             value={carCourse}
                             onChange={handleCarCourseChange}
+                            onBlur={handleCourseValid}
+                            error={isCourseValid}
                             type="number"
                             placeholder="Przebieg"
                             label="Przebieg pojazdu"
@@ -178,20 +207,20 @@ const AddVehicle = ({ id }) => {
                                 min: 0,
                                 maxLength: 6,
                             }}
-
                         />
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Rodzaj paliwa</FormLabel>
                             <RadioGroup onChange={handleCarFuelTypeChange} value={carFuelType} row aria-label="fuelType" name="fuelType">
                                 <FormControlLabel value="Diesel" control={<Radio />} label="Diesel" />
                                 <FormControlLabel value="Benzyna" control={<Radio />} label="Benzyna" />
-                                <FormControlLabel value="Inne" control={<Radio />} label="Inne" />
+                                <FormControlLabel checked value="Inne" control={<Radio />} label="Inne" />
                             </RadioGroup>
                         </FormControl>
                     </Grid>
                 </Grid>
                 <Button onClick={handleSubmit} variant="contained">Dodaj pojazd</Button>
                 <AddVehicleDialog isOpen={isDialogOpen} handleDialog={handleDialog} />
+                <ValidationDialog isOpen={isValidationDialogOpen} handleDialog={handleValidationDialog} />
             </Paper>
         </Box>
     );

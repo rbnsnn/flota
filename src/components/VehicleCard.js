@@ -32,12 +32,17 @@ const VehicleCard = ({ car }) => {
                 <Typography variant="h6" component="div">
                     {car.model}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <Typography color="text.secondary">
                     Rodzaj paliwa: {car.fuelType} <br />
+                </Typography>
+                <Typography color="text.secondary">
                     Przebieg: {car.course}
                 </Typography>
+                <Typography color="text.secondary">
+                    Rocznik: {car.productionYear.getFullYear().toString()}
+                </Typography>
                 <Typography variant="body2">
-                    Description
+                    Opis
                 </Typography>
             </CardContent>
             <CardActions sx={{

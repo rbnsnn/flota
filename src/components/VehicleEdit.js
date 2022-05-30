@@ -2,7 +2,6 @@ import React, { useState, forwardRef } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TextField } from '@mui/material';
@@ -39,7 +38,6 @@ const VehicleEdit = ({ car: vehicle }) => {
 
 
     const handleEdit = id => {
-        console.log('edit')
         const car = {
             brand: carBrand,
             model: carModel,
@@ -69,7 +67,7 @@ const VehicleEdit = ({ car: vehicle }) => {
     }
 
     const handleProductionYearChange = (e) => {
-        setCarProductionYear(e.target.value)
+        setCarProductionYear(e)
     }
 
     const handleCourseChange = (e) => {
@@ -94,70 +92,75 @@ const VehicleEdit = ({ car: vehicle }) => {
                 <DialogTitle>
                     Edycja pojazdu o id: {vehicle.id}
                 </DialogTitle>
-                <DialogContent>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <TextField
-                                id="carBrand"
-                                value={carBrand}
-                                onChange={handleBrandChange}
-                                placeholder="Marka"
-                                label="Marka pojazdu"
-                                variant="outlined"
 
-                            />
+                <Grid
+                    container
+                    padding={2}
+                    align="center"
+                    justify="center"
+                    direction="column"
+                >
 
-                            <TextField
-                                id="carModel"
-                                value={carModel}
-                                onChange={handleModelChange}
-                                placeholder="Model"
-                                label="Model pojazdu"
-                                variant="outlined"
-                            />
+                    <TextField
+                        id="carBrand"
+                        value={carBrand}
+                        onChange={handleBrandChange}
+                        placeholder="Marka"
+                        label="Marka pojazdu"
+                        variant="outlined"
+                        margin="normal"
+                    />
 
-                        </Grid>
-                        <Grid item xs={6}>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
-                                    id="carProductionYear"
-                                    views={['year']}
-                                    label="Rok produkcji"
-                                    value={carProductionYear}
-                                    onChange={handleProductionYearChange}
-                                    maxDate={currentDate}
-                                    minDate={minimumDate}
-                                    renderInput={(params) => <TextField {...params} helperText={null} />} />
-                            </LocalizationProvider>
+                    <TextField
+                        id="carModel"
+                        value={carModel}
+                        onChange={handleModelChange}
+                        placeholder="Model"
+                        label="Model pojazdu"
+                        variant="outlined"
+                        margin="normal"
+                    />
+
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            id="carProductionYear"
+                            views={['year']}
+                            label="Rok produkcji"
+                            value={carProductionYear}
+                            onChange={handleProductionYearChange}
+                            maxDate={currentDate}
+                            minDate={minimumDate}
+                            renderInput={(params) => <TextField margin="normal" {...params} helperText={null} />} />
+                    </LocalizationProvider>
+
+                    <TextField
+                        id="carCourse"
+                        value={carCourse}
+                        onChange={handleCourseChange}
+                        type="number"
+                        placeholder="Przebieg"
+                        label="Przebieg pojazdu"
+                        variant="outlined"
+                        pattern="\d*"
+                        margin="normal"
+                        inputProps={{
+                            min: 0,
+                            maxLength: 6,
+                        }}
+
+                    />
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Rodzaj paliwa</FormLabel>
+                        <RadioGroup onChange={handleFuelTypeChange} value={carFuelType} row aria-label="fuelType" name="fuelType">
+                            <FormControlLabel value="Diesel" control={<Radio />} label="Diesel" />
+                            <FormControlLabel value="Benzyna" control={<Radio />} label="Benzyna" />
+                            <FormControlLabel value="Inne" control={<Radio />} label="Inne" />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
 
 
-                            <TextField
-                                id="carCourse"
-                                value={carCourse}
-                                onChange={handleCourseChange}
-                                type="number"
-                                placeholder="Przebieg"
-                                label="Przebieg pojazdu"
-                                variant="outlined"
-                                pattern="\d*"
-                                inputProps={{
-                                    min: 0,
-                                    maxLength: 6,
-                                }}
 
-                            />
-                            <FormControl component="fieldset">
-                                <FormLabel component="legend">Rodzaj paliwa</FormLabel>
-                                <RadioGroup onChange={handleFuelTypeChange} value={carFuelType} row aria-label="fuelType" name="fuelType">
-                                    <FormControlLabel value="Diesel" control={<Radio />} label="Diesel" />
-                                    <FormControlLabel value="Benzyna" control={<Radio />} label="Benzyna" />
-                                    <FormControlLabel value="Inne" control={<Radio />} label="Inne" />
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid>
-                    </Grid>
-
-                </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => handleEdit(vehicle.id)} sx={{ color: 'green' }}>Potwierdź</Button>

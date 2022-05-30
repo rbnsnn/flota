@@ -3,7 +3,7 @@ export const THEME_CHANGE = 'THEME_CHANGE';
 export const DELETE_CAR = 'DELETE_CAR';
 export const EDIT_CAR = 'EDIT_CAR'
 
-export const addCar = ({ brand, model, productionYear, course, fuelType, id }) => ({
+export const addCar = ({ brand, model, productionYear, course, fuelType }) => ({
     type: ADD_CAR,
     payload: {
         brand,
