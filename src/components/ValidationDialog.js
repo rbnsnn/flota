@@ -21,7 +21,7 @@ const ValidationDialog = ({ isOpen, handleDialog }) => {
                 aria-describedby="Validation-dialog-description"
             >
                 <DialogContent id="Validation-dialog-description">
-                    Proszę uzupełnić wszystkie pola!
+                    Proszę uzupełnić wszystkie zaznaczone pola!
                 </DialogContent>
 
                 <DialogActions>
