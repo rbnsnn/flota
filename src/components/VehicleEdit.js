@@ -36,8 +36,47 @@ const VehicleEdit = ({ car: vehicle }) => {
     const [carCourse, setCarCourse] = useState(vehicle.course);
     const [carFuelType, setCarFuelType] = useState(vehicle.fuelType);
 
+    const [isBrandValid, setBrandValid] = useState(false)
+    const [isModelValid, setModelValid] = useState(false);
+    const [isCourseValid, setCourseValid] = useState(false)
+
+    const handleBrandValid = e => {
+        if (e.target.value === '') {
+            setBrandValid(true)
+        } else {
+            setBrandValid(false)
+        }
+    }
+
+    const handleModelValid = e => {
+        if (e.target.value === '') {
+            setModelValid(true)
+        } else {
+            setModelValid(false)
+        }
+    }
+
+    const handleCourseValid = e => {
+        if (e.target.value === '') {
+            setCourseValid(true)
+        } else {
+            setCourseValid(false)
+        }
+    }
 
     const handleEdit = id => {
+        if (carBrand.length === 0 || carModel.length === 0 || carCourse.length === 0) {
+            if (carBrand.length === 0) {
+                setBrandValid(true)
+            }
+            if (carModel.length === 0) {
+                setModelValid(true)
+            }
+            if (carCourse.length === 0) {
+                setCourseValid(true)
+            }
+            return
+        }
         const car = {
             brand: carBrand,
             model: carModel,
@@ -105,6 +144,8 @@ const VehicleEdit = ({ car: vehicle }) => {
                         id="carBrand"
                         value={carBrand}
                         onChange={handleBrandChange}
+                        onBlur={handleBrandValid}
+                        error={isBrandValid}
                         placeholder="Marka"
                         label="Marka pojazdu"
                         variant="outlined"
@@ -115,6 +156,8 @@ const VehicleEdit = ({ car: vehicle }) => {
                         id="carModel"
                         value={carModel}
                         onChange={handleModelChange}
+                        onBlur={handleModelValid}
+                        error={isModelValid}
                         placeholder="Model"
                         label="Model pojazdu"
                         variant="outlined"
@@ -137,6 +180,8 @@ const VehicleEdit = ({ car: vehicle }) => {
                         id="carCourse"
                         value={carCourse}
                         onChange={handleCourseChange}
+                        onBlur={handleCourseValid}
+                        error={isCourseValid}
                         type="number"
                         placeholder="Przebieg"
                         label="Przebieg pojazdu"
