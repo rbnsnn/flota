@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/flota/static/css/main.1932ea8d.css",
+    "main.js": "/flota/static/js/main.0d478e68.js",
+    "static/media/car.jpg": "/flota/static/media/car.ebbc7b17947644e301a0.jpg",
+    "index.html": "/flota/index.html",
+    "main.1932ea8d.css.map": "/flota/static/css/main.1932ea8d.css.map",
+    "main.0d478e68.js.map": "/flota/static/js/main.0d478e68.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1932ea8d.css",
+    "static/js/main.0d478e68.js"
+  ]
+}
